@@ -1,15 +1,18 @@
-import React from 'react'
+import {React,useState} from 'react'
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import {Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import "./less/Login.less"
-import logoImg from '../assets/logo.png'
-import {LoginApi} from '../request/api'
+import {LoginApi,RegisterApi} from '../request/api'
 
 export default function Login() {
   const navigate = useNavigate()
+  const [show, setShow] = useState(false)
+  const changeShow = () => {
+    setShow (!show)
+  }
 
-  const onFinish = (values) => {
+  const Login = (values) => {
     LoginApi({
       username: values.username,
       password: values.password
@@ -32,16 +35,31 @@ export default function Login() {
     })
   };
 
+  const Register = (values) => {
+    RegisterApi({
+      username: values.username,
+      password: values.password
+    }).then(res=>{
+      if(res.errCode===0){
+        message.success(res.message);
+        // 跳到登录页
+        setTimeout(()=>changeShow, 1500)
+      }else{
+        message.error(res.message);
+      }
+    })
+  };
+
   return (
     <div className="login">
       <div className='login_box'>
-        <img src={logoImg} alt="" />
+        <h1>WELCOME</h1>
         <Form
           name="basic"
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
+          onFinish={show?Register:Login}
           autoComplete="off"
         >
           <Form.Item
@@ -69,17 +87,42 @@ export default function Login() {
           >
             <Input.Password size="large" prefix={<LockOutlined />} placeholder="请输入密码" />
           </Form.Item>
+          
+          {
+            show&&<Form.Item
+            name="confirm"
+            className='input'
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: '请再次确认密码！',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('请输入相同密码！'));
+                },
+              }),
+            ]}
+          >
+            <Input.Password size="large" prefix={<LockOutlined />} placeholder="请再次确认密码" />
+          </Form.Item>
+          }
 
           <Form.Item>
             <Button size='large'
               style={{
-                background: 'linear-gradient(to top left,#ffe29f,#ffa99f,#ff719a)',
-                color: '#009ec5'
-              }} htmlType="submit" block>登录</Button>
+                background: 'radial-gradient(#70cccc, #b7e1e4, #e2f5f5)',
+                color: '#e2f5f5'
+              }} htmlType="submit" block>{show ? ' 注册 ':'登录'}</Button>
           </Form.Item>
 
           <Form.Item>
-            <Link to="/register">还没账号？立即注册</Link>
+            <div onClick={changeShow} className='switch'>{show?'已有账号？前往登录':'还没账号？立即注册'}</div>
           </Form.Item>
         </Form>
       </div>
