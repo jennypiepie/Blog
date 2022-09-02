@@ -1,0 +1,100 @@
+.layout-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .ant-list {
+        width: 60%;
+        height: 100%;
+        overflow-y: scroll;
+        opacity: 0.8;
+        padding: 20px;
+    
+        // 清除滚动条
+        &::-webkit-scrollbar {
+            width: 0 !important
+        }
+    
+        .ant-list-item {
+            position: relative;
+            margin-bottom: 15px;
+            height: 300px;
+            padding: 10px;
+            border-radius: 15px;
+            background: #fff;
+            flex-direction: column;
+    
+            .time {
+                width: 100%;
+                color: #ccc;
+                margin-bottom: 10px;
+            }
+    
+            .ant-list-item-meta {
+                width: 100%;
+    
+                .ant-list-item-meta-title {
+                    margin-bottom: 5px;
+                    color: rgba(0, 0, 0, 0.85);
+                    font-size: 20px;
+                    font-weight: 700;
+                    line-height: 1.5715;
+                }
+    
+                .ant-list-item-meta-description {
+                    color: rgba(0, 0, 0, 0.6);
+                    font-size: 14px;
+                    line-height: 1.5715;
+                }
+            }
+            .ant-list-item-action{
+                position: absolute;
+                top: 10;
+                right:0;
+                border-radius: 10px;
+                .edit{
+                    border: 0;
+                }
+                .delete{
+                    border: 0;
+                }
+            }
+        }
+
+    }
+    .ant-back-top:empty {
+        display: block;
+    }
+    .newArticle {
+        position: fixed;
+        right: 12%;
+        top: 45%;
+        width: 50px;
+        height:50px;
+        border-radius: 25px;
+        background: #e1f6eb;
+        color: #70cccc;
+        transition: all 0.3s ease-in;
+        &:hover {
+            transform: scale(1.2) rotate(360deg);
+        }
+        .anticon{
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            font-size: 200%;
+            rotate: -135deg;
+        }
+    }
+    .ant-back-top {
+        div{
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            background-color: #e1f6eb;
+            color: #ccc;
+            text-align: center;
+            font-size: 14px;
+        }
+    }
+}

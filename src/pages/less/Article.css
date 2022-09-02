@@ -1,0 +1,90 @@
+.layout-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.layout-content .ant-list {
+  width: 60%;
+  height: 100%;
+  overflow-y: scroll;
+  opacity: 0.8;
+  padding: 20px;
+}
+.layout-content .ant-list::-webkit-scrollbar {
+  width: 0 !important;
+}
+.layout-content .ant-list .ant-list-item {
+  position: relative;
+  margin-bottom: 15px;
+  height: 300px;
+  padding: 10px;
+  border-radius: 15px;
+  background: #fff;
+  flex-direction: column;
+}
+.layout-content .ant-list .ant-list-item .time {
+  width: 100%;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+.layout-content .ant-list .ant-list-item .ant-list-item-meta {
+  width: 100%;
+}
+.layout-content .ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-title {
+  margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5715;
+}
+.layout-content .ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-description {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+.layout-content .ant-list .ant-list-item .ant-list-item-action {
+  position: absolute;
+  top: 10;
+  right: 0;
+  border-radius: 10px;
+}
+.layout-content .ant-list .ant-list-item .ant-list-item-action .edit {
+  border: 0;
+}
+.layout-content .ant-list .ant-list-item .ant-list-item-action .delete {
+  border: 0;
+}
+.layout-content .ant-back-top:empty {
+  display: block;
+}
+.layout-content .newArticle {
+  position: fixed;
+  right: 12%;
+  top: 45%;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background: #e1f6eb;
+  color: #70cccc;
+  transition: all 0.3s ease-in;
+}
+.layout-content .newArticle:hover {
+  transform: scale(1.2) rotate(360deg);
+}
+.layout-content .newArticle .anticon {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  font-size: 200%;
+  rotate: -135deg;
+}
+.layout-content .ant-back-top div {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #e1f6eb;
+  color: #ccc;
+  text-align: center;
+  font-size: 14px;
+}
