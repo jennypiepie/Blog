@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, message, Upload } from 'antd';
 import {GetUserDataApi, ChangeUserDataApi} from '../request/api'
 import "./less/Means.less"
+import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import {connect} from 'react-redux'
 
@@ -28,6 +29,7 @@ function beforeUpload(file) {
 function Means(props){
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState("")
+  const navigate = useNavigate()
 
   useEffect(()=>{
     GetUserDataApi().then(res=>{
@@ -49,8 +51,15 @@ function Means(props){
         username: values.username,
         password: values.password
       }).then(res=>{
-        console.log(res)
+        // console.log(res)
         // 当你修改成功的时候，不要忘了重新登录
+        if(res.errCode===0){
+        message.success(res.message);
+        // 跳到登录页
+        setTimeout(()=>navigate('/login'), 1500)
+        }else{
+          message.error(res.message);
+        }
       })
     }
   }

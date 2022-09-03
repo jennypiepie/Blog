@@ -53,7 +53,7 @@ export default function Article() {
         // 重新刷页面，要么重新请求这个列表的数据   window.reload   调用getList(1)  增加变量的检测
         setUpdate(update+1)
       }else{
-        message.success(res.message)
+        message.error(res.message)
       }
     })
   }
