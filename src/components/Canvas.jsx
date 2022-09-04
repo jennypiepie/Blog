@@ -28,7 +28,10 @@ function Canvas() {
     theta: -Math.PI / 4*3
     }
     step(branch1)
-    step(branch2)
+  
+    setTimeout(() => {
+      step(branch2)
+    },1000)
   }
 
   const pendingTasks = []
@@ -37,19 +40,19 @@ function Canvas() {
     const end = getEndPoint(b)
       drawLine(b)
     
-    if (depth < 3 || Math.random() < 0.5) {
+    if ((depth < 4 || Math.random() < 0.5) && depth<10) {
       pendingTasks.push(()=>step({
       start: end,
       length: b.length+(Math.random()*10-5),
-      theta:b.theta-0.3*Math.random()
+      theta:b.theta-0.4*Math.random()
       },depth+1))
     }
 
-    if (depth < 3 || Math.random() < 0.5) {
+    if ((depth < 4 || Math.random() < 0.5) && depth<10) {
       pendingTasks.push(()=>step({
       start: end,
       length: b.length+(Math.random()*5),
-      theta:b.theta+0.3*Math.random()
+      theta:b.theta+0.4*Math.random()
       },depth+1))
     }
 
