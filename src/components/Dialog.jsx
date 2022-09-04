@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Divider, Button } from 'antd';
+import { Button } from 'antd';
+import './less/Dialog.less'
 
 const Dialog = (props) => {
     const node = document.createElement('div');
@@ -12,11 +13,9 @@ const Dialog = (props) => {
     }, []);
     return createPortal(
         <div className="com-dialog">
-            <div className="com-dialog-inner" style={{width: props.dialogWidth}}>
+            <div className="com-dialog-inner" >
                 <div className="dialog-title">{props.title}</div>
-                <Divider />
                 <div className="content">{props.children}</div>
-                <Divider />
                 <div className="btn">
                     <Button type="default" onClick={props.onCancle}>{props.cancelText || '取消'}</Button>
                     <Button type="primary" onClick={props.onOk}>{props.sureText || '确定'}</Button>

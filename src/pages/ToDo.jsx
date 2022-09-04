@@ -9,7 +9,7 @@ export default function ToDo() {
   const [isShowDialog, setIsShowDialog] = useState(false);
   const toggleDialog = (section) => {
       console.log(section);
-      // setIsShowDialog(true);
+      setIsShowDialog(true);
     }
     const closeDialog = () => {
         setIsShowDialog(false);
@@ -86,23 +86,24 @@ export default function ToDo() {
                 ))}
                   {provided.placeholder}
                   <div className="button" onClick={() => {toggleDialog(section)}}>+</div>
-                   {
-                      isShowDialog
-                      && <Dialog
-                      title="这是标题"
-                      dialogWidth='80%'
-                      onCancle={closeDialog}
-                      onOk={onSure}
-                      cancelText="残忍离开"
-                      sureText="我再想想"
-                      >
-                      <div className='dialog-content'>具体内容请写在这里...</div>
-                    </Dialog>
-                  }
+
                 </div>
             )}
             </Droppable>
           ))
+        }
+        {
+          isShowDialog
+          && <Dialog
+          title="这是标题"
+          dialogWidth='80%'
+          onCancle={closeDialog}
+          onOk={onSure}
+          cancelText="残忍离开"
+          sureText="我再想想"
+          >
+            <div className='dialog-content'>具体内容请写在这里...</div>
+          </Dialog>
         }
       </div>
     </DragDropContext>
