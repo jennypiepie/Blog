@@ -5,7 +5,7 @@ import './less/demo.less'
 
 function Demo() {
   return (
-      <div className="content">
+      <div className="demo-content">
         <div className="demo-box">
           <div className="title">Haunted-House</div>
           <div className="demo-item">

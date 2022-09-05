@@ -5,6 +5,7 @@ import { CaretDownOutlined } from '@ant-design/icons';
 import defaultAvatar from '../assets/defaultAvatar.jpg'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux';
+import './less/Header.less'
 
 function Header(props) {
     const navigator = useNavigate()

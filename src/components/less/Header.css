@@ -1,0 +1,48 @@
+header {
+  height: 60px;
+  width: 100%;
+  background: #c9edf3;
+  padding: 0 20px;
+  display: flex;
+  position: fixed;
+  z-index: 10;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: #333;
+}
+header img {
+  height: 100%;
+  margin-left: -18px;
+}
+header .ant-menu-horizontal {
+  width: 400px;
+  line-height: 60px;
+  border-bottom: 0;
+  background: #c9edf3;
+}
+header .ant-menu-horizontal .ant-menu-item {
+  width: 100px;
+}
+header .ant-menu-horizontal .ant-menu-item::after {
+  display: none;
+}
+header .right {
+  height: 40px;
+}
+header .right .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+header .right span {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+header .right .ant-dropdown-link {
+  height: 60px;
+  display: block;
+  color: #333;
+}
+header .right .ant-dropdown-link:hover {
+  color: #1890ff;
+}

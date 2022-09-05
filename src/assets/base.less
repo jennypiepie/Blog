@@ -23,56 +23,6 @@ body{
     }
 }
 
-header{
-    height: @header_height;
-    width: 100%;
-    background: #c9edf3;
-    padding: 0 20px;
-    display: flex;
-    position: fixed;
-    z-index: 10;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: #333;
-    img{
-        height: 100%;
-        margin-left: -18px;
-    }
-    .ant-menu-horizontal{
-        width: 400px;
-        line-height: 60px;
-        border-bottom: 0;
-        background: #c9edf3;
-        .ant-menu-item{
-            width: 100px;
-        }
-        .ant-menu-item::after{
-            display: none;
-        }
-    }
-    .right{
-        height: 40px;
-        .avatar{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-        span{
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .ant-dropdown-link{
-            height: 60px;
-            display: block;
-            color: #333;
-            &:hover{
-                color: #1890ff;
-            }
-        }
-    }
-}
-
-
 
 .ant-layout-content {
     height: calc(100vh - @header_height);

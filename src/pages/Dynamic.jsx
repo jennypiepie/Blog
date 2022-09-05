@@ -5,7 +5,7 @@ import './less/Dynamic.less'
 
 function Dynamic() {
   return (
-    <div className='content'>
+    <div className='dynamic-content'>
       <Timeline mode="alternate">
         <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
         <Timeline.Item color="green">Solve initial network problems 2015-09-01</Timeline.Item>

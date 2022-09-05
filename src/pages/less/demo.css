@@ -1,19 +1,19 @@
-.content {
+.demo-content {
   width: 80%;
-  padding: 5px,10px,5px,10px;
+  padding: 20px;
   background: rgba(225, 246, 235, 0.8);
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   border-radius: 20px;
 }
-.content .title {
+.demo-content .title {
   text-align: center;
   margin-bottom: 20px;
   color: #70cccc;
   font-weight: 700;
 }
-.content .demo-item {
+.demo-content .demo-item {
   width: 300px;
   height: 200px;
   background: #ccc;
@@ -22,11 +22,11 @@
   overflow: hidden;
   transition: all 0.25s;
 }
-.content .demo-item:hover {
+.demo-content .demo-item:hover {
   scale: 1.1;
   transform: translate(-5px, -5px);
 }
-.content .demo-item img {
+.demo-content .demo-item img {
   width: 100%;
   height: 100%;
 }

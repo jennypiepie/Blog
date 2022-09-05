@@ -1,23 +1,25 @@
 import React,{useState} from 'react'
 import { DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 import mockData from '../assets/mockData'
-import Dialog from '../components/Dialog';
+import Modal from '../components/Modal';
 import './less/ToDo.less'
 
 export default function ToDo() {
   
-  const [isShowDialog, setIsShowDialog] = useState(false);
-  const toggleDialog = (section) => {
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [title, setTitle] = useState();
+  const toggleModal = (section) => {
       console.log(section);
-      setIsShowDialog(true);
+      setIsShowModal(true);
+      setTitle(section.title)
     }
-    const closeDialog = () => {
-        setIsShowDialog(false);
+    const closeModal = () => {
+        setIsShowModal(false);
     }
     const onSure = () => {
         console.log('确定...');
         setTimeout(() => {
-            setIsShowDialog(false);
+            setIsShowModal(false);
         }, 2000);
     }
   
@@ -53,59 +55,62 @@ export default function ToDo() {
     setData(data)
   }
 
-  const addTask = (section) => {
-    console.log(section);
-  }
-
 
   return (
-    <DragDropContext onDragEnd={(e)=>dragEnd(e)}>
-      <div className="task-box">
-        {
-          data.map(section => (
-            <Droppable droppableId={section.id} key={section.id}>
-            {(provided, snapshot) => (
-                <div className="task" ref={provided.innerRef} {...provided.droppableProps}>
-                <div className="title">{section.title}</div>     
-                {section.tasks.map((task, index) => (
-                    <Draggable draggableId={task.id} index={index} key ={task.id}>
-                    {(provided, snapshot) => (
-                      <div
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                      >
-                        {// eslint-disable-next-line max-len
-                          <div className="taskItem"
-                            style={{ background: snapshot.isDragging ? "#e9ffff" : "lightgreen" }}>
-                            {task.content}
-                          </div>
-                        }</div>
-                    )}
-                    </Draggable>
-                ))}
-                  {provided.placeholder}
-                  <div className="button" onClick={() => {toggleDialog(section)}}>+</div>
+    <div>
+      <DragDropContext onDragEnd={(e)=>dragEnd(e)}>
+        <div className="task-box">
+          {
+            data.map(section => (
+              <Droppable droppableId={section.id} key={section.id}>
+              {(provided, snapshot) => (
+                  <div className="task" ref={provided.innerRef} {...provided.droppableProps}>
+                  <div className="title">{section.title}</div>     
+                  {section.tasks.map((task, index) => (
+                      <Draggable draggableId={task.id} index={index} key ={task.id}>
+                      {(provided, snapshot) => (
+                        <div
+                          {...provided.dragHandleProps}
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
+                        >
+                          {// eslint-disable-next-line max-len
+                            <div className="taskItem"
+                              style={{ background: snapshot.isDragging ? "#e9ffff" : "lightgreen" }}>
+                              {task.content}
+                            </div>
+                          }</div>
+                      )}
+                      </Draggable>
+                  ))}
+                    {provided.placeholder}
+                    <div className="button" onClick={() => {toggleModal(section)}}>+</div>
 
-                </div>
-            )}
-            </Droppable>
-          ))
-        }
-        {
-          isShowDialog
-          && <Dialog
-          title="这是标题"
-          dialogWidth='80%'
-          onCancle={closeDialog}
+                  </div>
+              )}
+              </Droppable>
+            ))
+          }
+        </div>
+      </DragDropContext>
+      {
+        isShowModal&&<Modal
+          title = {title}
+          onCancel={closeModal}
           onOk={onSure}
-          cancelText="残忍离开"
-          sureText="我再想想"
-          >
-            <div className='dialog-content'>具体内容请写在这里...</div>
-          </Dialog>
-        }
-      </div>
-    </DragDropContext>
+          // cancelText="残忍离开"
+          // sureText="我再想想"
+        >
+          <input style={{
+            borderStyle: 'none',
+            outline: 'none',
+            width: '100%',
+            height: '100%',
+            background: 'lightgreen'
+            }}>
+          </input>
+        </Modal>
+      }
+    </div>
   )
 }

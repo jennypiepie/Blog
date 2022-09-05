@@ -36,3 +36,6 @@
   border-radius: 5px;
   text-align: center;
 }
+.task-box .dialog-content {
+  background: #b2f0d0;
+}
