@@ -26,6 +26,7 @@ export default function ToDo() {
       const sourceCol = data[sourceColIndex]
       const sourceTask = [...sourceCol.tasks,newTask]
       data[sourceColIndex].tasks = sourceTask
+      setData(data)
     }
       setTimeout(() => {
         setIsShowModal(false);
@@ -54,14 +55,14 @@ export default function ToDo() {
       data[destinationColIndex].tasks = destinationTask
 
     }else {
-      const destinationColIndex = data.findIndex(e => e.id === destination.droppableId)
-      const destinationCol = data[destinationColIndex]
-      const destinationTask = [...destinationCol.tasks]
-      const [removed] = destinationTask.splice(destination.index, 1)
-      destinationTask.splice(destination.index, 0, removed)
-      data[destinationColIndex].tasks = destinationTask
+      const sourceColIndex = data.findIndex(e => e.id === source.droppableId)
+      const sourceCol = data[sourceColIndex]
+      const sourceTask = [...sourceCol.tasks]
+      const [removed] = sourceTask.splice(source.index, 1)
+      sourceTask.splice(destination.index, 0, removed)
+      data[sourceColIndex].tasks = sourceTask
     }
-    // setData(data)
+    setData(data)
   }
 
 
