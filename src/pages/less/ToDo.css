@@ -2,6 +2,7 @@
   padding: 20px;
   width: 80%;
   display: flex;
+  align-items: flex-start;
 }
 .task-box .task {
   display: flex;

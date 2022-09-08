@@ -18,7 +18,6 @@
   width: 100%;
   height: 50px;
   border-radius: 0;
-  padding: 0;
   margin: 0;
 }
 .modal-content .btn-box {
@@ -29,6 +28,7 @@
 }
 .modal-content .btn-box .btn {
   width: 50%;
+  cursor: pointer;
 }
 .modal-overlay {
   position: absolute;
