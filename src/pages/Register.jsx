@@ -13,7 +13,8 @@ export default function Register() {
     RegisterApi({
       username: values.username,
       password: values.password
-    }).then(res=>{
+    }).then(res => {
+      console.log(res);
       if(res.errCode===0){
         message.success(res.message);
         // 跳到登录页

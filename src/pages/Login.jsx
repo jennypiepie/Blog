@@ -21,7 +21,7 @@ export default function Login() {
         message.success(res.message)
         // 存储数据
         localStorage.setItem('avatar', res.data.avatar)
-        localStorage.setItem('cms-token', res.data['cms-token'])
+        localStorage.setItem('blog-token', res.data['blog-token'])
         localStorage.setItem('editable', res.data.editable)
         localStorage.setItem('player', res.data.player)
         localStorage.setItem('username', res.data.username)
@@ -40,10 +40,12 @@ export default function Login() {
       username: values.username,
       password: values.password
     }).then(res=>{
-      if(res.errCode===0){
+      if (res.errCode === 0) {
         message.success(res.message);
         // 跳到登录页
-        setTimeout(()=>changeShow, 1500)
+        setTimeout(() => {
+          changeShow()
+        }, 1500);
       }else{
         message.error(res.message);
       }

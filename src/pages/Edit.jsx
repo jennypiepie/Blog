@@ -11,10 +11,10 @@ export default function Edit() {
   const [content, setContent] = useState('')
   const location = useLocation()
   const [title, setTitle] = useState('')
-  const [subTitle, setSubTitle] = useState('')
+  const [tag, setTag] = useState('')
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate()
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
   const params = useParams()
 
   // 处理请求数据
@@ -37,14 +37,14 @@ export default function Edit() {
       .validateFields()    // validate校验   field字段
       .then((values) => {
         // form.resetFields();   // reset重置
-        let { title, subTitle } = values;
+        let { title, tag } = values;
         // 地址栏有id代表现在想要更新一篇文章
         if (params.id) {
           // 更新文章的请求
-          ArticleUpdateApi({ title, subTitle, content, id: params.id }).then(res => dealData(res.errCode, res.message))
+          ArticleUpdateApi({ title, tag, content, id: params.id }).then(res => dealData(res.errCode, res.message))
         } else {
           // 添加文章的请求
-          ArticleAddApi({ title, subTitle, content }).then(res => dealData(res.errCode, res.message))
+          ArticleAddApi({ title, tag, content }).then(res => dealData(res.errCode, res.message))
         }
       })
       .catch(() => false);
@@ -64,7 +64,7 @@ export default function Edit() {
         if (res.errCode === 0) {
           editor.txt.html(res.data.content) // 重新设置编辑器内容
           setTitle(res.data.title)
-          setSubTitle(res.data.subTitle)
+          setTag(res.data.tag)
         }
       })
     }
@@ -81,7 +81,7 @@ export default function Edit() {
         ghost={false}
         onBack={params.id ? () => window.history.back() : null}
         title="文章编辑"
-        subTitle={"当前日期：" + moment(new Date()).format("YYYY-MM-DD")}
+        tag={"当前日期：" + moment(new Date()).format("YYYY-MM-DD")}
         extra={<Button key="1" type="primary" onClick={() => setIsModalVisible(true)}>提交文章</Button>}
       ></PageHeader>
       <div id="div1" style={{ padding: '0 20px 20px', background: '#fff' }}></div>
@@ -92,7 +92,7 @@ export default function Edit() {
           labelCol={{ span: 3 }}
           wrapperCol={{ span: 21 }}
           autoComplete="off"
-          initialValues={{ title, subTitle }}
+          initialValues={{ title, tag }}
         >
           <Form.Item
             label="标题"
@@ -103,8 +103,8 @@ export default function Edit() {
           </Form.Item>
 
           <Form.Item
-            label="副标题"
-            name="subTitle"
+            label="标签"
+            name="tag"
           >
             <Input />
           </Form.Item>

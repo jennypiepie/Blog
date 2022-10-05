@@ -10,34 +10,42 @@ export default function Article() {
   const [list, setList] = useState([])
   const navigate = useNavigate()
   const [update, setUpdate] = useState(1)
-  const [total, setTotal] = useState(0)
-  const [current, setCurrent] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  // const [total, setTotal] = useState(0)
+  // const [current, setCurrent] = useState(1)
+  // const [pageSize, setPageSize] = useState(10)
 
   // 请求封装
-  const getList = (num) => {
-    ArticleListApi({
-      num,
-      count: pageSize
-    }).then(res => {
+  // const getList = (num) => {
+  //   ArticleListApi({
+  //     num,
+  //     count: pageSize
+  //   }).then(res => {
+  //     if (res.errCode === 0) {
+  //       let { arr, total, num, count } = res.data;
+  //       setList(arr);
+  //       setTotal(total);
+  //       setCurrent(num);
+  //       setPageSize(count);
+  //     }
+  //   })
+  // }
+    const getList = (num) => {
+    ArticleListApi().then(res => {
       if (res.errCode === 0) {
-        let { arr, total, num, count } = res.data;
+        let arr = res.data;
         setList(arr);
-        setTotal(total);
-        setCurrent(num);
-        setPageSize(count);
       }
     })
   }
 
   // 请求列表数据  componentDidMount
   useEffect(() => {
-    getList(current)
+    getList()
   }, [])
 
   // 模拟componentDidUpdate
   useEffect(() => {
-    getList(current)
+    getList()
   }, [update])
 
   // // 分页
@@ -71,10 +79,10 @@ export default function Article() {
             ]}
           >
             <Skeleton loading={false}>
-              <div className='time'>{moment(item.date).format("YYYY-MM-DD | hh:mm:ss")}</div>
+              <div className='time'>{moment(item.date).format("YYYY-MM-DD")} | {item.tag}</div>
               <List.Item.Meta
                 title={<a href="!#">{item.title}</a>}
-                description={item.subTitle}
+                description={<div dangerouslySetInnerHTML = {{ __html: item.content }} />}
               />
             </Skeleton>
           </List.Item>

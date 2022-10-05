@@ -4,7 +4,7 @@ const AuthRoute = (props) => {
     const { children } = props
     // 拿到判断是否登录的变量
     const location = useLocation()
-    const isLoggedIn = localStorage.hasOwnProperty('cms-token')
+    const isLoggedIn = localStorage.hasOwnProperty('blog-token')
 
     return isLoggedIn ? (
     // 如果是登录用户，则可以访问我们传入的 children 组件

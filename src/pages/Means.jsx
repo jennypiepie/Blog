@@ -121,7 +121,7 @@ function Means(props){
         action="/api/upload"
         beforeUpload={beforeUpload}
         onChange={handleChange}
-        headers={{"cms-token": localStorage.getItem('cms-token')}}
+        headers={{"blog-token": localStorage.getItem('blog-token')}}
       >
         {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
       </Upload>
