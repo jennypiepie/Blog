@@ -16,8 +16,8 @@
 .layout-content .ant-list .ant-list-item {
   position: relative;
   margin-bottom: 15px;
-  height: 300px;
-  padding: 10px;
+  height: 200px;
+  padding: 15px;
   border-radius: 15px;
   background: #fff;
   flex-direction: column;
@@ -26,6 +26,12 @@
   width: 100%;
   color: #ccc;
   margin-bottom: 10px;
+}
+.layout-content .ant-list .ant-list-item .time a {
+  color: #ccc;
+}
+.layout-content .ant-list .ant-list-item .time a:hover {
+  color: #70cccc;
 }
 .layout-content .ant-list .ant-list-item .ant-list-item-meta {
   width: 100%;
@@ -48,11 +54,11 @@
   right: 0;
   border-radius: 10px;
 }
-.layout-content .ant-list .ant-list-item .ant-list-item-action .edit {
+.layout-content .ant-list .ant-list-item .ant-list-item-action .ico {
   border: 0;
 }
-.layout-content .ant-list .ant-list-item .ant-list-item-action .delete {
-  border: 0;
+.layout-content .ant-list .ant-list-item .ant-list-item-action .ico:hover {
+  color: #70cccc;
 }
 .layout-content .ant-back-top:empty {
   display: block;

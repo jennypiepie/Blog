@@ -55,7 +55,7 @@ export default function Article() {
 
   // 删除
   const delFn = (id) => {
-    ArticleDelApi({id}).then(res=>{
+    ArticleDelApi({ id }).then(res => {
       if(res.errCode===0){
         message.success(res.message)
         // 重新刷页面，要么重新请求这个列表的数据   window.reload   调用getList(1)  增加变量的检测
@@ -69,20 +69,20 @@ export default function Article() {
   return (
     <div className='layout-content'>
       <List
-        itemLayout=""
         dataSource={list}
         renderItem={item => (
           <List.Item
+            className='box-shadow'
             actions={[
-              <Button className='edit' onClick={()=>navigate('/edit/'+item.id)}><EditOutlined /></Button>,
-              <Button className='delete' onClick={()=>delFn(item.id)}><DeleteOutlined /></Button>
+              <Button className='ico' onClick={()=>navigate('/edit/'+item.id)}><EditOutlined /></Button>,
+              <Button className='ico' onClick={()=>delFn(item.id)}><DeleteOutlined /></Button>
             ]}
           >
             <Skeleton loading={false}>
-              <div className='time'>{moment(item.date).format("YYYY-MM-DD")} | {item.tag}</div>
+              <div className='time'>{moment(item.date).format("YYYY-MM-DD")} | {<a href="!#">{item.tag}</a>}</div>
               <List.Item.Meta
-                title={<a href="!#">{item.title}</a>}
-                description={<div dangerouslySetInnerHTML = {{ __html: item.content }} />}
+                title={item.title}
+                description={<div dangerouslySetInnerHTML = {{ __html: item.content }} className='cutline'/>}
               />
             </Skeleton>
           </List.Item>

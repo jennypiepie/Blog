@@ -15,14 +15,10 @@ function Header(props) {
 
     // 模拟componentDidMount
     useEffect(() => {
-        let username1 = localStorage.getItem('username')
-        let avatar1 = localStorage.getItem('avatar')
-        if (username1) {
-            setUsername(username1)
-        }
-        if (avatar1) {
-            setAvatar('http://47.93.114.103:6688/' + avatar1)
-        }
+        let username1 = localStorage.getItem('username') ||'匿名用户'
+        let avatar1 = process.env.SERVER_PORT + localStorage.getItem('avatar') || defaultAvatar
+        setUsername(username1)
+        setAvatar(avatar1)
     }, [props.mykey])
 
     // 退出登录
@@ -45,7 +41,7 @@ function Header(props) {
             <img src={logoImg} alt="" className="logo" />
             <div className='navigation'>
                 <Menu theme="light" mode="horizontal">
-                    <Menu.Item key="1" onClick={() => navigator('/dynamic')}>动态</Menu.Item>
+                    <Menu.Item key="1" onClick={() => navigator('/')}>首页</Menu.Item>
                     <Menu.Item key="4" onClick={() => navigator('/article')}>文章</Menu.Item>
                     <Menu.Item key="2" onClick={() => navigator('/todo')}>To Do</Menu.Item>
                     <Menu.Item key="5" onClick={() => navigator('/demo')}>Demo</Menu.Item>

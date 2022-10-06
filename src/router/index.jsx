@@ -1,13 +1,4 @@
-/* 
-    App > List + Edit + Means
-    Login
-    Register
-    History模式  --  BrowserRouter
-    Hash模式     --  HashRouter
-*/
-
 import App from '../App'
-import Dynamic from '../pages/Dynamic'
 import Article from '../pages/Article'
 import ToDo from '../pages/ToDo'
 import Demo from '../pages/Demo'
@@ -22,7 +13,6 @@ const BaseRouter = () => (
     <Router>
         <Routes>
             <Route path='/' element={<AuthRoute><App /></AuthRoute>}>
-                <Route path='/dynamic' element={<Dynamic />}></Route>
                 <Route path='/article' element={<Article />}></Route>
                 <Route path='/todo' element={<ToDo />}></Route>
                 <Route path='/demo' element={<Demo />}></Route>

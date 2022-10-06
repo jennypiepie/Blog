@@ -17,8 +17,8 @@
         .ant-list-item {
             position: relative;
             margin-bottom: 15px;
-            height: 300px;
-            padding: 10px;
+            height: 200px;
+            padding: 15px;
             border-radius: 15px;
             background: #fff;
             flex-direction: column;
@@ -27,6 +27,12 @@
                 width: 100%;
                 color: #ccc;
                 margin-bottom: 10px;
+                a{
+                    color: #ccc;
+                    &:hover{
+                        color: #70cccc;
+                    }
+                }
             }
     
             .ant-list-item-meta {
@@ -51,11 +57,11 @@
                 top: 10;
                 right:0;
                 border-radius: 10px;
-                .edit{
+                .ico{
                     border: 0;
-                }
-                .delete{
-                    border: 0;
+                    &:hover {
+                        color: #70cccc;
+                    }
                 }
             }
         }
