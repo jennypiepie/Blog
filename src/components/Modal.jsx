@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Button } from 'antd';
 import './less/Modal.less'
 
 const Dialog = (props) => {

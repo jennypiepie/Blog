@@ -5,38 +5,42 @@ import { ArticleListApi, ArticleDelApi } from '../request/api'
 import {useNavigate} from 'react-router-dom'
 import moment from 'moment'
 import './less/Article.less'
+import { useRef } from 'react';
   
 export default function Article() {
   const [list, setList] = useState([])
   const navigate = useNavigate()
   const [update, setUpdate] = useState(1)
-  // const [total, setTotal] = useState(0)
+  const ref = useRef()
+  const [dom, setDom] = useState(HTMLDivElement | null);
   // const [current, setCurrent] = useState(1)
   // const [pageSize, setPageSize] = useState(10)
 
-  // 请求封装
-  // const getList = (num) => {
-  //   ArticleListApi({
-  //     num,
-  //     count: pageSize
-  //   }).then(res => {
-  //     if (res.errCode === 0) {
-  //       let { arr, total, num, count } = res.data;
-  //       setList(arr);
-  //       setTotal(total);
-  //       setCurrent(num);
-  //       setPageSize(count);
-  //     }
-  //   })
-  // }
-    const getList = (num) => {
-    ArticleListApi().then(res => {
-      if (res.errCode === 0) {
-        let arr = res.data;
-        setList(arr);
-      }
-    })
+  const getList = (num) => {
+      ArticleListApi({
+        current: 1,
+        counts:10
+      }).then(res => {
+        if (res.errCode === 0) {
+          let arr = res.data.arr;
+          setList(arr);
+        }
+      })
   }
+
+    // 监听页面滚动
+    const handleOnScroll = () => {
+      if (dom) {
+        const contentScrollTop = dom.scrollTop; //滚动条距离顶部
+        const clientHeight = dom.clientHeight; //可视区域
+        const scrollHeight = dom.scrollHeight; //滚动条内容的总高度
+        console.log('scrollHeight ',scrollHeight);
+        
+        if (contentScrollTop + clientHeight >= scrollHeight) {
+          // setList();    // 获取数据的方法
+        }
+      }
+    };
 
   // 请求列表数据  componentDidMount
   useEffect(() => {
@@ -48,10 +52,7 @@ export default function Article() {
     getList()
   }, [update])
 
-  // // 分页
-  // const onChange = (pages) => {
-  //   getList(pages);
-  // }
+
 
   // 删除
   const delFn = (id) => {
@@ -67,7 +68,8 @@ export default function Article() {
   }
 
   return (
-    <div className='layout-content'>
+    <div className='layout-content'
+    >
       <List
         dataSource={list}
         renderItem={item => (

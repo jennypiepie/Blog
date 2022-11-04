@@ -22,7 +22,7 @@ function beforeUpload(file) {
 
 function Means(props){
   const [loading, setLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrl, setImageUrl] = useState(process.env.SERVER_PORT + localStorage.getItem('avatar'))
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -66,11 +66,11 @@ function Means(props){
     }
     if (info.file.status === 'done') {
       setLoading(false)
-      // setImageUrl(imageUrl)
       if (info.file.response.errCode === 0) {
         message.success('头像修改成功')
         // 存储图片名称
         localStorage.setItem('avatar', info.file.response.data.avatar)
+        setImageUrl(process.env.SERVER_PORT + localStorage.getItem('avatar'))
         // 使用react-redux更新header组件
         props.addKey()
       }
@@ -131,9 +131,9 @@ function Means(props){
         action="/api/upload"
         beforeUpload={beforeUpload}
         onChange={handleChange}
-        headers={{"blog-token": localStorage.getItem('blog-token')}}
+        headers={{ "blog-token": localStorage.getItem('blog-token') }}
       >
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%'}} /> : uploadButton}
       </Upload>
     </div>
   )
