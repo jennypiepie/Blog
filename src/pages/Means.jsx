@@ -4,7 +4,8 @@ import {GetUserDataApi, ChangeUserDataApi} from '../request/api'
 import "./less/Means.less"
 import { useNavigate } from 'react-router-dom'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import {connect} from 'react-redux'
+import { useSetRecoilState } from 'recoil';
+import { avatarState} from '../store'
 
 
 // 限制图片大小只能是200KB
@@ -24,6 +25,7 @@ function Means(props){
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState(process.env.SERVER_PORT + localStorage.getItem('avatar'))
   const navigate = useNavigate()
+  const changeAvatar = useSetRecoilState(avatarState)
 
   useEffect(()=>{
     GetUserDataApi().then(res=>{
@@ -71,8 +73,8 @@ function Means(props){
         // 存储图片名称
         localStorage.setItem('avatar', info.file.response.data.avatar)
         setImageUrl(process.env.SERVER_PORT + localStorage.getItem('avatar'))
-        // 使用react-redux更新header组件
-        props.addKey()
+        // 使用recoil更新header组件
+        changeAvatar((prev)=>prev+1)
       }
 
     }
@@ -139,12 +141,4 @@ function Means(props){
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addKey(){
-      dispatch({type: "addKeyFn"})
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Means)
+export default Means

@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import { List, Skeleton, Button, message,BackTop } from 'antd';
 import {UpOutlined,EditOutlined,DeleteOutlined,SendOutlined} from "@ant-design/icons";
 import { ArticleListApi, ArticleDelApi } from '../request/api'
 import {useNavigate} from 'react-router-dom'
 import moment from 'moment'
 import './less/Article.less'
-import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { listStore} from '../store'
   
 export default function Article() {
   const navigate = useNavigate()
-  const [update, setUpdate] = useState(1)
   const ref = useRef(1)
-  const [list2,setList2] = useRecoilState(listStore)
+  const [list,setList] = useRecoilState(listStore)
 
   const getList = async (current) => {
       await ArticleListApi({
@@ -21,7 +19,7 @@ export default function Article() {
         counts:10
       }).then(res => {
         if (res.errCode === 0) {
-          setList2((old)=>[...old,...res.data.arr])
+          setList((old)=>[...old,...res.data.arr])
         }
       })
   }
@@ -44,20 +42,12 @@ export default function Article() {
     return () => {window.removeEventListener('scroll',handleOnScroll)}
   }, [])
 
-
-  // 模拟componentDidUpdate
-  // useEffect(() => {
-  //   getList(ref.current)
-  // }, [update])
-
-
   // 删除
   const delFn = (id) => {
     ArticleDelApi({ id }).then(res => {
       if(res.errCode===0){
         message.success(res.message)
-        // 重新刷页面，要么重新请求这个列表的数据   window.reload   调用getList(1)  增加变量的检测
-        setUpdate(update + 1)
+        window.location.reload()
       }else{
         message.error(res.message)
       }
@@ -67,7 +57,7 @@ export default function Article() {
   return (
     <div className='layout-content'>
       <List
-        dataSource={list2}
+        dataSource={list}
         renderItem={item => (
           <List.Item
             className='box-shadow'

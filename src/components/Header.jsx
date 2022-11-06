@@ -4,14 +4,16 @@ import { Menu, Dropdown, message,Input } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import defaultAvatar from '../assets/defaultAvatar.jpg'
 import { useNavigate } from 'react-router-dom'
-import { connect } from 'react-redux';
 import './less/Header.less'
+import { useRecoilValue } from 'recoil';
+import { avatarState} from '../store'
 
-function Header(props) {
+function Header() {
     const navigator = useNavigate()
     const [avatar, setAvatar] = useState(defaultAvatar)
     const [username, setUsername] = useState("游客")
     const { Search } = Input;
+    const isAvatarChange = useRecoilValue(avatarState)
 
     // 模拟componentDidMount
     useEffect(() => {
@@ -19,7 +21,7 @@ function Header(props) {
         let avatar1 = process.env.SERVER_PORT + localStorage.getItem('avatar') || defaultAvatar
         setUsername(username1)
         setAvatar(avatar1)
-    }, [props.mykey])
+    }, [isAvatarChange])
 
     // 退出登录
     const logout = () => {
@@ -64,10 +66,4 @@ function Header(props) {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        mykey: state.mykey
-    }
-}
-
-export default connect(mapStateToProps)(Header)
+export default Header
