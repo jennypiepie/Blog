@@ -70,7 +70,6 @@ export default function Edit() {
     }
 
     return () => {
-      // 组件销毁时销毁编辑器  注：class写法需要在componentWillUnmount中调用
       editor.destroy()
     }
   }, [location.pathname])

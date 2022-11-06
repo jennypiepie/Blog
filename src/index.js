@@ -3,10 +3,14 @@ import "./assets/base.less"
 import Router from './router'
 import store from './store'
 import {Provider} from 'react-redux'
+import { RecoilRoot } from 'recoil'
+
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router />
+        <RecoilRoot>
+            <Router />
+        </RecoilRoot>
     </Provider>,
     document.getElementById('root')
 )
